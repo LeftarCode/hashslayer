@@ -24,8 +24,39 @@ int main(int argc, char* argv[]) {
 
 	// TODO: It depends on hash type and wordlist content
 	std::vector<std::string> wordlist;
-	for (int i = 0; i < 16; i++) {
-		wordlist.push_back("AAAAAAAA");
+	for (int i = 0; i < 1; i++) {
+		wordlist.push_back("AAAA1111");
+		wordlist.push_back("BBBB2222");
+		wordlist.push_back("CCCC3333");
+		wordlist.push_back("DDDD4444");
+		wordlist.push_back("EEEE5555");
+		wordlist.push_back("FFFF6666");
+		wordlist.push_back("GGGG7777");
+		wordlist.push_back("HHHH8888");
+		wordlist.push_back("IIII9999");
+		wordlist.push_back("JJJJ0000");
+		wordlist.push_back("KKKKZZZZ");
+		wordlist.push_back("LLLLYYYY");
+		wordlist.push_back("MMMMXXXX");
+		wordlist.push_back("NNNNVVVV");
+		wordlist.push_back("OOOOUUUU");
+		wordlist.push_back("PPPPSSSS");
+		wordlist.push_back("AAAA!111");
+		wordlist.push_back("BBBB@222");
+		wordlist.push_back("CCCC#333");
+		wordlist.push_back("DDDD$444");
+		wordlist.push_back("EEEE%555");
+		wordlist.push_back("FFFF^666");
+		wordlist.push_back("GGGG&777");
+		wordlist.push_back("HHHH*888");
+		wordlist.push_back("IIII(999");
+		wordlist.push_back("JJJJ)000");
+		wordlist.push_back("KKKK-ZZZ");
+		wordlist.push_back("LLLL_YYY");
+		wordlist.push_back("MMMM+XXX");
+		wordlist.push_back("NNNN=VVV");
+		wordlist.push_back("OOOO`UUU");
+		wordlist.push_back("PPPP>SSS");
 	}
 
 	// TODO: Parse target hash from string

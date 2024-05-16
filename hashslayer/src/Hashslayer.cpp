@@ -16,8 +16,7 @@ Hashslayer::Hashslayer(HashslayerSettings settings) : m_settings(settings) {
     m_kernelConfig = getKernelConfig(settings.hashType);
     m_kernel = cl::Kernel(m_program, m_kernelConfig.name.c_str(), &err);
 
-    // TODO: Select explicit interfaces
-    // TODO: Fix input buffer size
+    // TODO: Select explicit interfacess
     int passwordsInBlock = sizeof(ap_int<512>)/m_settings.maxPasswordLength;
     int blocksCount = m_settings.passwordCount/passwordsInBlock;
     blocksCount += m_kernelConfig.coresCount;
@@ -35,6 +34,8 @@ void Hashslayer::transferWordlist(std::vector<std::string> wordlist) {
 	if (m_settings.passwordCount % m_kernelConfig.coresCount != 0) {
 		std::cout << "[-] Password Count must be divisible by " << m_kernelConfig.coresCount << std::endl;
 	}
+
+	wordlist = transformWordlist(wordlist);
 
 	ap_int<512> configBlock;
 	configBlock.range(511, 0) = 0;
@@ -125,6 +126,39 @@ void Hashslayer::loadXCLBinary() {
 
     m_devices.resize(1);
     m_program = cl::Program(m_context, m_devices, bins, NULL, &err);
+}
+
+std::vector<std::string> padAndShuffle(std::string first, std::string second, int messageSize, int passwordLength) {
+	int messageBytes = messageSize / 8;
+	std::vector<std::string> res(passwordLength/messageBytes);
+
+	first.resize(passwordLength);
+	second.resize(passwordLength);
+
+	for (int i = 0; i < passwordLength/messageBytes; i++) {
+		std::string newString = "";
+		newString += first.substr(i*messageBytes, messageBytes);
+		newString += second.substr(i*messageBytes, messageBytes);
+		res[i] = newString;
+	}
+
+	return res;
+}
+
+std::vector<std::string> Hashslayer::transformWordlist(const std::vector<std::string>& wordlist) {
+	std::vector<std::string> transformedWordlist(wordlist.size());
+	for (size_t i = 0; i < wordlist.size()/m_kernelConfig.coresCount; i++) {
+		for (size_t j = 0; j < m_kernelConfig.coresCount/2; j++) {
+			size_t firstIdx = i*m_kernelConfig.coresCount + j;
+			size_t secondIdx = i*m_kernelConfig.coresCount + j + m_kernelConfig.coresCount/2;
+			std::vector<std::string> shuffled =
+					padAndShuffle(wordlist[firstIdx], wordlist[secondIdx], m_kernelConfig.messageSize, m_settings.maxPasswordLength);
+			transformedWordlist[firstIdx] = shuffled[0];
+			transformedWordlist[secondIdx] = shuffled[1];
+		}
+	}
+
+	return transformedWordlist;
 }
 
 std::vector<ap_int<512>> Hashslayer::packWordlist(std::vector<std::string> wordlist) {

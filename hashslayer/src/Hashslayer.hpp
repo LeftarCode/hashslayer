@@ -45,5 +45,6 @@ private:
 
 	void initDevice();
 	void loadXCLBinary();
+	std::vector<std::string> transformWordlist(const std::vector<std::string>& wordlist);
 	std::vector<ap_int<512>> packWordlist(std::vector<std::string> wordlist);
 };
