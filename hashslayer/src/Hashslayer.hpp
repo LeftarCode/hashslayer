@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <ap_int.h>
+#inclide "config/kernel.hpp"
 #define CL_HPP_CL_1_2_DEFAULT_BUILD
 #define CL_HPP_TARGET_OPENCL_VERSION 120
 #define CL_HPP_MINIMUM_OPENCL_VERSION 120
@@ -13,10 +14,6 @@
 
 enum AttackType {
 	eDictionary, eBruteforce
-};
-
-enum HashType {
-	eSha1
 };
 
 struct HashslayerSettings {
@@ -36,6 +33,7 @@ public:
 	std::string getResult();
 private:
 	HashslayerSettings m_settings;
+	KernelConfig m_kernelConfig;
     std::vector<cl::Device> m_devices;
 	cl::Device m_device;
 	cl::Context m_context;
