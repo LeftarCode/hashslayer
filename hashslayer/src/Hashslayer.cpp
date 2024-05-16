@@ -21,7 +21,7 @@ Hashslayer::Hashslayer(HashslayerSettings settings) : m_settings(settings) {
     int passwordsInBlock = sizeof(ap_int<512>)/m_settings.maxPasswordLength;
     int blocksCount = m_settings.passwordCount/passwordsInBlock;
     blocksCount += m_kernelConfig.coresCount;
-    m_inBuffer = cl::Buffer(m_context, CL_MEM_READ_ONLY, sizeof(ap_int<512>)*m_inBuffer, NULL, &err);
+    m_inBuffer = cl::Buffer(m_context, CL_MEM_READ_ONLY, sizeof(ap_int<512>)*blocksCount, NULL, &err);
     m_outBuffer = cl::Buffer(m_context, CL_MEM_WRITE_ONLY, sizeof(ap_int<512>), NULL, &err);
     m_queue.flush();
     m_queue.finish();
@@ -32,14 +32,14 @@ Hashslayer::Hashslayer(HashslayerSettings settings) : m_settings(settings) {
 
 void Hashslayer::transferWordlist(std::vector<std::string> wordlist) {
 	cl_int err;
-	if (m_settings.passwordCount % m_kernelConfig.coreCounts != 0) {
-		std::cout << "[-] Password Count must be divisible by " << m_kernelConfig.coreCounts << std::endl;
+	if (m_settings.passwordCount % m_kernelConfig.coresCount != 0) {
+		std::cout << "[-] Password Count must be divisible by " << m_kernelConfig.coresCount << std::endl;
 	}
 
 	ap_int<512> configBlock;
 	configBlock.range(511, 0) = 0;
 	configBlock.range(511, 448) = m_settings.maxPasswordLength;
-	configBlock.range(447, 384) = m_settings.passwordCount / m_kernelConfig.coreCounts;
+	configBlock.range(447, 384) = m_settings.passwordCount / m_kernelConfig.coresCount;
 
 	std::cout << "[+] Packing wordlist to AXI blocks..." << std::endl;
 	auto axiBlocks = packWordlist(wordlist);

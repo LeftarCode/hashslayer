@@ -6,7 +6,7 @@
         <kernels name="sha1Kernel" projectName="hashslayer_kernels">
           <computeUnits name="sha1Kernel_1" slr="">
             <args name="inputData" master="true" memory=""/>
-            <args name="foundPassword" master="true" memory=""/>
+            <args name="outputData" master="true" memory=""/>
           </computeUnits>
         </kernels>
       </binaryContainers>
@@ -16,7 +16,7 @@
         <kernels name="sha1Kernel" projectName="hashslayer_kernels">
           <computeUnits name="sha1Kernel_1" slr="">
             <args name="inputData" master="true" memory=""/>
-            <args name="foundPassword" master="true" memory=""/>
+            <args name="outputData" master="true" memory=""/>
           </computeUnits>
         </kernels>
       </binaryContainers>
@@ -28,7 +28,7 @@
         <kernels name="sha1Kernel" projectName="hashslayer_kernels">
           <computeUnits name="sha1Kernel_1" slr="">
             <args name="inputData" master="true" memory=""/>
-            <args name="foundPassword" master="true" memory=""/>
+            <args name="outputData" master="true" memory=""/>
           </computeUnits>
         </kernels>
       </binaryContainers>
@@ -40,7 +40,7 @@
         <kernels name="sha1Kernel" projectName="hashslayer_kernels">
           <computeUnits name="sha1Kernel_1" slr="">
             <args name="inputData" master="true" memory=""/>
-            <args name="foundPassword" master="true" memory=""/>
+            <args name="outputData" master="true" memory=""/>
           </computeUnits>
         </kernels>
       </binaryContainers>
