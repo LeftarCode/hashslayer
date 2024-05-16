@@ -13,12 +13,15 @@ Hashslayer::Hashslayer(HashslayerSettings settings) : m_settings(settings) {
 
     loadXCLBinary();
 
-    // TODO: Kernel name depends on hash type
-    m_kernel = cl::Kernel(m_program, getKernelName(settings.hashType).c_str(), &err);
+    m_kernelConfig = getKernelConfig(settings.hashType);
+    m_kernel = cl::Kernel(m_program, m_kernelConfig.name.c_str(), &err);
 
     // TODO: Select explicit interfaces
     // TODO: Fix input buffer size
-    m_inBuffer = cl::Buffer(m_context, CL_MEM_READ_ONLY, sizeof(ap_int<512>)*m_settings.maxPasswordLength*m_settings.passwordCount, NULL, &err);
+    int passwordsInBlock = sizeof(ap_int<512>)/m_settings.maxPasswordLength;
+    int blocksCount = m_settings.passwordCount/passwordsInBlock;
+    blocksCount += m_kernelConfig.coresCount;
+    m_inBuffer = cl::Buffer(m_context, CL_MEM_READ_ONLY, sizeof(ap_int<512>)*m_inBuffer, NULL, &err);
     m_outBuffer = cl::Buffer(m_context, CL_MEM_WRITE_ONLY, sizeof(ap_int<512>), NULL, &err);
     m_queue.flush();
     m_queue.finish();
@@ -29,14 +32,20 @@ Hashslayer::Hashslayer(HashslayerSettings settings) : m_settings(settings) {
 
 void Hashslayer::transferWordlist(std::vector<std::string> wordlist) {
 	cl_int err;
+	if (m_settings.passwordCount % m_kernelConfig.coreCounts != 0) {
+		std::cout << "[-] Password Count must be divisible by " << m_kernelConfig.coreCounts << std::endl;
+	}
 
 	ap_int<512> configBlock;
 	configBlock.range(511, 0) = 0;
-	configBlock.range(511, 448) = m_settings.passwordCount;
+	configBlock.range(511, 448) = m_settings.maxPasswordLength;
+	configBlock.range(447, 384) = m_settings.passwordCount / m_kernelConfig.coreCounts;
 
 	std::cout << "[+] Packing wordlist to AXI blocks..." << std::endl;
 	auto axiBlocks = packWordlist(wordlist);
-	axiBlocks.insert(axiBlocks.begin(), 1, configBlock);
+	for(int i = 0; i < m_kernelConfig.coresCount; i++) {
+		axiBlocks.insert(axiBlocks.begin(), 1, configBlock);
+	}
 
 	std::cout << "[+] Mapping FPGA buffer to host VA space..." << std::endl;
 	auto fpgaMemory = (ap_int<512>*)m_queue.enqueueMapBuffer(m_inBuffer, CL_TRUE, CL_MAP_WRITE, 0, sizeof(ap_int<512>) * axiBlocks.size(), NULL, NULL, &err);
@@ -116,15 +125,6 @@ void Hashslayer::loadXCLBinary() {
 
     m_devices.resize(1);
     m_program = cl::Program(m_context, m_devices, bins, NULL, &err);
-}
-
-std::string Hashslayer::getKernelName(HashType type) {
-	switch(type) {
-	case eSha1:
-		return "sha1Kernel";
-	}
-
-	return "invalidType";
 }
 
 std::vector<ap_int<512>> Hashslayer::packWordlist(std::vector<std::string> wordlist) {

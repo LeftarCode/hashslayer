@@ -9,7 +9,7 @@ enum HashType {
 struct KernelConfig {
 	int coresCount;
 	bool isSalted;
-	std::string kernelName;
+	std::string name;
 };
 
 KernelConfig getKernelConfig(HashType hashType) {

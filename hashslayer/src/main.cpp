@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 
 	// TODO: It depends on hash type and wordlist content
 	std::vector<std::string> wordlist;
-	for (int i = 0; i < 8; i++) {
+	for (int i = 0; i < 16; i++) {
 		wordlist.push_back("AAAAAAAA");
 	}
 

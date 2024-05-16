@@ -45,6 +45,5 @@ private:
 
 	void initDevice();
 	void loadXCLBinary();
-	std::string getKernelName(HashType type);
 	std::vector<ap_int<512>> packWordlist(std::vector<std::string> wordlist);
 };
