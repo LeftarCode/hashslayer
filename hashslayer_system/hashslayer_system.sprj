@@ -18,6 +18,11 @@
       <applications name="hashslayer_kernels" domainName="" domainPrettyName="pl" appBuildConfig="Emulation-HW"/>
       <applications name="hashslayer" domainName="x86" domainPrettyName="x86" appBuildConfig="Emulation-HW"/>
     </configBuildOptions>
+    <lastBuildOptions xsi:type="systemproject:SystemOptions" target="hw_emu">
+      <applications name="hashslayer_system_hw_link" domainName="" domainPrettyName="pl" appBuildConfig="Emulation-HW"/>
+      <applications name="hashslayer_kernels" domainName="" domainPrettyName="pl" appBuildConfig="Emulation-HW"/>
+      <applications name="hashslayer" domainName="x86" domainPrettyName="x86" appBuildConfig="Emulation-HW"/>
+    </lastBuildOptions>
   </configuration>
   <configuration name="Hardware" id="com.xilinx.sdx.system.managedbuilder.hw.configuration.735039544">
     <configBuildOptions xsi:type="systemproject:SystemOptions" target="hw">
@@ -25,5 +30,10 @@
       <applications name="hashslayer_kernels" domainName="" domainPrettyName="pl" appBuildConfig="Hardware"/>
       <applications name="hashslayer" domainName="x86" domainPrettyName="x86" appBuildConfig="Hardware"/>
     </configBuildOptions>
+    <lastBuildOptions xsi:type="systemproject:SystemOptions" target="hw">
+      <applications name="hashslayer_system_hw_link" domainName="" domainPrettyName="pl" appBuildConfig="Hardware"/>
+      <applications name="hashslayer_kernels" domainName="" domainPrettyName="pl" appBuildConfig="Hardware"/>
+      <applications name="hashslayer" domainName="x86" domainPrettyName="x86" appBuildConfig="Hardware"/>
+    </lastBuildOptions>
   </configuration>
 </systemproject:SystemProject>

@@ -14,19 +14,10 @@ Hashslayer::Hashslayer(HashslayerSettings settings) : m_settings(settings) {
     loadXCLBinary();
 
     m_kernelConfig = getKernelConfig(settings.hashType);
-    m_kernel = cl::Kernel(m_program, m_kernelConfig.name.c_str(), &err);
-
-    // TODO: Select explicit interfacess
-    int passwordsInBlock = sizeof(ap_int<512>)/m_settings.maxPasswordLength;
-    int blocksCount = m_settings.passwordCount/passwordsInBlock;
-    blocksCount += m_kernelConfig.coresCount;
-    m_inBuffer = cl::Buffer(m_context, CL_MEM_READ_ONLY, sizeof(ap_int<512>)*blocksCount, NULL, &err);
-    m_outBuffer = cl::Buffer(m_context, CL_MEM_WRITE_ONLY, sizeof(ap_int<512>), NULL, &err);
-    m_queue.flush();
-    m_queue.finish();
-
-    m_kernel.setArg(0, m_inBuffer);
-    m_kernel.setArg(1, m_outBuffer);
+    for(int i = 0; i < m_kernelConfig.kernelsCount; i++) {
+    	std::string kernelName = m_kernelConfig.name + "_" + std::to_string(i+1);
+    	m_kernel.push_back(cl::Kernel(m_program, kernelName.c_str(), &err));
+    }
 }
 
 void Hashslayer::transferWordlist(std::vector<std::string> wordlist) {
@@ -35,30 +26,26 @@ void Hashslayer::transferWordlist(std::vector<std::string> wordlist) {
 		std::cout << "[-] Password Count must be divisible by " << m_kernelConfig.coresCount << std::endl;
 	}
 
-	wordlist = transformWordlist(wordlist);
+	// TODO: Copy data from host to FPGA
+	// TODO: These data should be available all the time
+	auto inAxiBlocks = convertWordlist2AXI(wordlist);
+	std::vector<ap_int<512>> outAxiBlocks(m_kernelConfig.kernelsCount);
+    std::cout << "[+] Creating buffers..." << std::endl;
+	createBuffers(inAxiBlocks, outAxiBlocks);
 
-	ap_int<512> configBlock;
-	configBlock.range(511, 0) = 0;
-	configBlock.range(511, 448) = m_settings.maxPasswordLength;
-	configBlock.range(447, 384) = m_settings.passwordCount / m_kernelConfig.coresCount;
+    std::vector<cl::Memory> inputData;
+    for (int i = 0; i < m_kernelConfig.kernelsCount; i++) {
+    	inputData.push_back(m_inBuffer[i]);
+    }
 
-	std::cout << "[+] Packing wordlist to AXI blocks..." << std::endl;
-	auto axiBlocks = packWordlist(wordlist);
-	for(int i = 0; i < m_kernelConfig.coresCount; i++) {
-		axiBlocks.insert(axiBlocks.begin(), 1, configBlock);
-	}
-
-	std::cout << "[+] Mapping FPGA buffer to host VA space..." << std::endl;
-	auto fpgaMemory = (ap_int<512>*)m_queue.enqueueMapBuffer(m_inBuffer, CL_TRUE, CL_MAP_WRITE, 0, sizeof(ap_int<512>) * axiBlocks.size(), NULL, NULL, &err);
-	std::cout << "[+] Copying data to buffer..." << std::endl;
-	memcpy(fpgaMemory, axiBlocks.data(), sizeof(ap_int<512>) * axiBlocks.size());
-	std::cout << "[+] Transferring buffer to FPGA..." << std::endl;
-	m_queue.enqueueMigrateMemObjects({m_inBuffer},0);
-	std::cout << "[+] Transfer done!" << std::endl;
+    std::cout << "[+] Transferring data..." << std::endl;
+    m_queue.enqueueMigrateMemObjects(inputData, 0);
 }
 
 void Hashslayer::start() {
-	m_queue.enqueueTask(m_kernel);
+	for(auto kernel : m_kernel) {
+		m_queue.enqueueTask(kernel);
+	}
 }
 
 void Hashslayer::wait() {
@@ -66,24 +53,24 @@ void Hashslayer::wait() {
 }
 
 std::string Hashslayer::getResult() {
-	cl_int err;
-	ap_int<512> block;
+//	cl_int err;
+//	ap_int<512> block;
+//
+//	std::cout << "[+] Mapping FPGA buffer to host VA space..." << std::endl;
+//	auto fpgaMemory = (ap_int<512>*)m_queue.enqueueMapBuffer(m_outBuffer, CL_TRUE, CL_MAP_READ, 0, sizeof(ap_int<512>), NULL, NULL, &err);
+//	std::cout << "[+] Transferring buffer from FPGA..." << std::endl;
+//	m_queue.enqueueMigrateMemObjects({m_outBuffer},CL_MIGRATE_MEM_OBJECT_HOST);
+//	std::cout << "[+] Copying data to local buffer" << std::endl;
+//	wait();
+//	std::cout << "[+] Unpacking AXI block..." << std::endl;
+//
+//	std::string result = "";
+//	for(int i = 0; i < m_settings.maxPasswordLength; i++) {
+//		result += (char)fpgaMemory[0].range(i*8+7,i*8);
+//	}
+//	result += '\0';
 
-	std::cout << "[+] Mapping FPGA buffer to host VA space..." << std::endl;
-	auto fpgaMemory = (ap_int<512>*)m_queue.enqueueMapBuffer(m_outBuffer, CL_TRUE, CL_MAP_READ, 0, sizeof(ap_int<512>), NULL, NULL, &err);
-	std::cout << "[+] Transferring buffer from FPGA..." << std::endl;
-	m_queue.enqueueMigrateMemObjects({m_outBuffer},CL_MIGRATE_MEM_OBJECT_HOST);
-	std::cout << "[+] Copying data to local buffer" << std::endl;
-	wait();
-	std::cout << "[+] Unpacking AXI block..." << std::endl;
-
-	std::string result = "";
-	for(int i = 0; i < m_settings.maxPasswordLength; i++) {
-		result += (char)fpgaMemory[0].range(i*8+7,i*8);
-	}
-	result += '\0';
-
-	return result;
+	return "";
 }
 
 void Hashslayer::initDevice() {
@@ -126,6 +113,29 @@ void Hashslayer::loadXCLBinary() {
 
     m_devices.resize(1);
     m_program = cl::Program(m_context, m_devices, bins, NULL, &err);
+}
+
+void Hashslayer::createBuffers(std::vector<std::vector<ap_int<512>>> kernelInData, std::vector<ap_int<512>> kernelOutData) {
+	cl_int err;
+    int passwordsInBlock = sizeof(ap_int<512>)/m_settings.maxPasswordLength;
+    int blocksCount = m_settings.passwordCount/passwordsInBlock;
+    blocksCount += m_kernelConfig.coresCount;
+    for(int i = 0; i < m_kernelConfig.kernelsCount; i++) {
+    	cl_mem_ext_ptr_t extPtrIn = {MemoryBanks[i], kernelInData[i].data(), 0};
+    	cl_mem_ext_ptr_t extPtrOut = {MemoryBanks[i], &kernelOutData[i], 0};
+        auto inBuffer = cl::Buffer(m_context, CL_MEM_EXT_PTR_XILINX | CL_MEM_USE_HOST_PTR | CL_MEM_READ_ONLY, sizeof(ap_int<512>)*kernelInData[i].size(), &extPtrIn, &err);
+        auto outBuffer = cl::Buffer(m_context, CL_MEM_EXT_PTR_XILINX | CL_MEM_USE_HOST_PTR | CL_MEM_WRITE_ONLY, sizeof(ap_int<512>), &extPtrOut, &err);
+
+    	m_inBuffer.push_back(inBuffer);
+    	m_outBuffer.push_back(outBuffer);
+    }
+    m_queue.flush();
+    m_queue.finish();
+
+    for(int i = 0; i < m_kernelConfig.kernelsCount; i++) {
+        m_kernel[i].setArg(0, m_inBuffer[i]);
+        m_kernel[i].setArg(1, m_outBuffer[i]);
+    }
 }
 
 std::vector<std::string> padAndShuffle(std::string first, std::string second, int messageSize, int passwordLength) {
@@ -188,4 +198,51 @@ std::vector<ap_int<512>> Hashslayer::packWordlist(std::vector<std::string> wordl
 	}
 
 	return packedWordlist;
+}
+
+std::vector<std::vector<ap_int<512>>> Hashslayer::splitBlocks(std::vector<ap_int<512>> axiBlocks, int kernelsCount) {
+	int blocksCount = axiBlocks.size();
+	int blocksPerKernel = blocksCount / kernelsCount;
+
+	ap_int<512> zero = 0;
+
+	std::vector<std::vector<ap_int<512>>> res;
+	for (int i = 0; i < kernelsCount; i++) {
+		std::vector<ap_int<512>> blocks;
+		for (int j = 0; j < m_kernelConfig.coresCount; j++) {
+			blocks.push_back(zero);
+		}
+		for (int j = 0; j < blocksPerKernel; j++) {
+			blocks.push_back(axiBlocks[i*blocksPerKernel + j]);
+		}
+		res.push_back(blocks);
+	}
+
+	return res;
+}
+
+std::vector<std::vector<ap_int<512>>> Hashslayer::convertWordlist2AXI(const std::vector<std::string>& wordlist) {
+	auto transformedWordlist = transformWordlist(wordlist);
+
+	std::cout << "[+] Packing wordlist to AXI blocks..." << std::endl;
+	auto axiBlocks = packWordlist(transformedWordlist);
+	std::cout << "[+] Spliting AXI blocks..." << std::endl;
+	auto finalBlocks = splitBlocks(axiBlocks, m_kernelConfig.kernelsCount);
+	std::cout << "[+] Redistribute blocks..." << std::endl;
+
+	int passwordsInBlock = 64/m_settings.maxPasswordLength;
+
+	for(auto& kernelBlocks : finalBlocks) {
+		int passwordsForCore = ((kernelBlocks.size()-m_kernelConfig.coresCount)*passwordsInBlock) / m_kernelConfig.coresCount;
+		ap_int<512> configBlock;
+		configBlock.range(511, 0) = 0;
+		configBlock.range(511, 448) = m_settings.maxPasswordLength;
+		configBlock.range(447, 384) = passwordsForCore;
+
+		for (int i = 0; i < m_kernelConfig.coresCount; i++) {
+			kernelBlocks[i] = configBlock;
+		}
+	}
+
+	return finalBlocks;
 }

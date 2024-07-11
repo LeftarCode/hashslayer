@@ -24,6 +24,13 @@ struct HashslayerSettings {
 	uint32_t passwordCount;
 };
 
+const int MemoryBanks[] = {
+		XCL_MEM_DDR_BANK0,
+		XCL_MEM_DDR_BANK1,
+		XCL_MEM_DDR_BANK2,
+		XCL_MEM_DDR_BANK3
+};
+
 class Hashslayer {
 public:
 	Hashslayer(HashslayerSettings settings);
@@ -40,11 +47,14 @@ private:
 	cl::CommandQueue m_queue;
 	cl::Program::Binaries m_xclBins;
 	cl::Program m_program;
-	cl::Kernel m_kernel;
-	cl::Buffer m_inBuffer, m_outBuffer;
+	std::vector<cl::Kernel> m_kernel;
+	std::vector<cl::Buffer> m_inBuffer, m_outBuffer;
 
 	void initDevice();
 	void loadXCLBinary();
+	void createBuffers(std::vector<std::vector<ap_int<512>>> kernelInData, std::vector<ap_int<512>> kernelOutData);
 	std::vector<std::string> transformWordlist(const std::vector<std::string>& wordlist);
 	std::vector<ap_int<512>> packWordlist(std::vector<std::string> wordlist);
+	std::vector<std::vector<ap_int<512>>> splitBlocks(std::vector<ap_int<512>> axiBlocks, int kernelsCount);
+	std::vector<std::vector<ap_int<512>>> convertWordlist2AXI(const std::vector<std::string>& wordlist);
 };

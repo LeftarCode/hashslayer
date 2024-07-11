@@ -1,6 +1,5 @@
-#include "simple/feeder.hpp"
 #include <xf_security/sha1.hpp>
-#include "kernel_config.hpp"
+#include "config.hpp"
 
 template <unsigned int _burstLength, unsigned int _channelNumber>
 static void readIn(ap_uint<512>* ptr,
@@ -45,7 +44,6 @@ LOOP_READ_DATA:
 
 template <unsigned int _channelNumber>
 void splitText(hls::stream<ap_uint<512> >& textStrm, hls::stream<ap_uint<32> > msgStrm[_channelNumber]) {
-#pragma HLS inline off
     ap_uint<512> axiWord = textStrm.read();
     for (unsigned int i = 0; i < _channelNumber; i++) {
 #pragma HLS unroll
@@ -75,11 +73,61 @@ LOOP_TEXTNUM:
             msgLenStrm[j].write(textLength);
         }
         for (int j = 0; j < textLengthInGrpSize; j++) {
+#pragma HLS pipeline II = 1
             splitText<_channelNumber>(textInStrm, msgStrm);
         }
     }
     for (unsigned int i = 0; i < _channelNumber; i++) {
         eMsgLenStrm[i].write(true);
+    }
+}
+
+template <unsigned int _channelNumber>
+static void sha1Parallel(hls::stream<ap_uint<32> > msgStrm[_channelNumber],
+                             hls::stream<ap_uint<64> > msgLenStrm[_channelNumber],
+                             hls::stream<bool> eMsgLenStrm[_channelNumber],
+                             hls::stream<ap_uint<160> > hshStrm[_channelNumber],
+                             hls::stream<bool> eHshStrm[_channelNumber]) {
+#pragma HLS dataflow
+    for (int i = 0; i < _channelNumber; i++) {
+#pragma HLS unroll
+        xf::security::sha1<32>(msgStrm[i], msgLenStrm[i], eMsgLenStrm[i], hshStrm[i], eHshStrm[i]);
+    }
+}
+
+template <unsigned int _channelNumber>
+void simpleEater(
+		hls::stream<ap_uint<160>> hshStrm[_channelNumber],
+		hls::stream<bool> eHshStrm[_channelNumber],
+		ap_uint<512>* foundPassword) {
+	ap_uint<160> targetHash = 0;
+    ap_uint<_channelNumber> unfinish;
+    for (int i = 0; i < _channelNumber; i++) {
+#pragma HLS unroll
+        unfinish[i] = 1;
+    }
+
+    int messageIdx = 0;
+    bool passwordFound = false;
+    while(unfinish != 0) {
+        for (int i = 0; i < _channelNumber; i++) {
+#pragma HLS pipeline II = 1
+            bool e = eHshStrm[i].read();
+            if (!e) {
+                ap_uint<160> hsh = hshStrm[i].read();
+            	if(targetHash == hsh) {
+            		foundPassword[0].range(511, 448) = messageIdx;
+            		passwordFound = true;
+            		break;
+            	}
+            } else {
+                unfinish[i] = 0;
+            }
+        }
+    }
+
+    if (!passwordFound) {
+        foundPassword[0].range(511, 448) = -1;
     }
 }
 
@@ -137,24 +185,6 @@ extern "C" void sha1Kernel(ap_uint<512>* inputData, ap_uint<512>* outputData) {
     // TODO: Extract target hash from feeder
     readIn<_burstLength, _channelNumber>(inputData, textInStrm, textLengthStrm, textNumStrm);
     splitInput<_channelNumber, _burstLength>(textInStrm, textLengthStrm, textNumStrm, msgStrm, msgLenStrm, eMsgLenStrm);
-
-    for (int i = 0; i < _channelNumber; i++) {
-        ap_uint<32> message1 = msgStrm[i].read();
-        ap_uint<32> message2 = msgStrm[i].read();
-        if (message1 == message2) {
-        	outputData[0].range(31, 0) = message1;
-        }
-    }
-    //xf::security::sha1<msgWidth>(msgStrm, msgLenStrm, eMsgLenStrm, hshStrm, eHshStrm);
-
-    //bool isFinish = eHshStrm.read();
-    //while(!isFinish) {
-    //	ap_uint<128> hash = hshStrm.read();
-    //	int firstByte = hash.range(7, 0);
-    //	int secondByte = hash.range(15, 8);
-    //	hls::print("Hash: %d ", (int)firstByte);
-    //	hls::print("%d\n", (int)secondByte);
-
-    //	isFinish = eHshStrm.read();
-    //}
+    sha1Parallel<_channelNumber>(msgStrm, msgLenStrm, eMsgLenStrm, hshStrm, eHshStrm);
+    simpleEater<_channelNumber>(hshStrm, eHshStrm, outputData);
 }

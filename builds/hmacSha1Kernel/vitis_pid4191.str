@@ -1,0 +1,181 @@
+/*
+
+Xilinx Vitis v2021.1.0 (64-bit) [Major: 2021, Minor: 1]
+SW Build 3245906 on 2021-06-09-18:10:55
+
+Process ID (PID): 4191
+License: Customer
+
+Current time: 	Sat May 18 13:24:12 CEST 2024
+Time zone: 	Central European Standard Time (Europe/Warsaw)
+
+OS: Ubuntu
+OS Version: 5.0.5-050005-generic
+OS Architecture: amd64
+Available processors (cores): 8
+
+Display: :10.0
+Screen size: 2560x1440
+Available screens: 1
+Available disk space: 275 GB
+
+Java version: 	11.0.2 64-bit
+Java home: 	/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2
+Java executable location: 	/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2/bin/java
+Java initial memory (-Xms): 	64 MB
+Java maximum memory (-Xmx):	 1,024 MB
+
+Java library paths: /home/user/Xilinx/Vitis/2021.1/tps/lnx64/javafx-sdk-11.0.2/lib:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o/Ubuntu:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o:/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2/lib/:/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2/lib//server:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o/Ubuntu:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o:/home/user/Xilinx/Vitis/2021.1/tps/lnx64/python-3.8.3/lib:/home/user/Xilinx/Vitis/2021.1/aietools/lib/lnx64.o:/opt/xilinx/xrt/lib:/opt/xilinx/xrt/lib::/home/user/Xilinx/Vitis/2021.1/bin/../lnx64/tools/dot/lib:/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib
+
+Java class paths: /home/user/Xilinx/Vitis/2021.1/eclipse/lnx64.o//plugins/org.eclipse.equinox.launcher_1.5.700.v20200207-2156.jar
+LD_LIBRARY_PATH: /home/user/Xilinx/Vitis
+
+User name: 	user
+User home directory: /home/user
+User working directory: /home/user/fpga_projects/git-hashslayer/builds/hmacSha1Kernel
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /home/user/Xilinx/Vitis
+HDI_APPROOT: /home/user/Xilinx/Vitis/2021.1
+RDI_DATADIR: /home/user/Xilinx/Vitis/2021.1/data
+RDI_BINDIR: /home/user/Xilinx/Vitis/2021.1/bin
+
+Vitis preferences directory: /home/user/.Xilinx/Vitis/2021.1/
+Vitis workspace directory: /home/user/fpga_projects/git-hashslayer
+Vitis workspace log file location: /home/user/fpga_projects/git-hashslayer/.metadata/.log
+Engine tmp dir: 	
+
+Xilinx Environment Variables
+----------------------------
+SDK_DIR: /home/user/aws-fpga/sdk
+VITIS_DIR: /home/user/aws-fpga/Vitis
+VIVADO_TOOL_VER: 2021.1
+VIVADO_TOOL_VERSION: 2021.1
+XILINX_DSP: 
+XILINX_ENABLE_AWS_WHITELIST: 095707098027
+XILINX_HLS: /home/user/Xilinx/Vitis_HLS/2021.1
+XILINX_PLANAHEAD: /home/user/Xilinx/Vitis/2021.1
+XILINX_SDK: /home/user/Xilinx/Vitis/2021.1
+XILINX_VITIS: /home/user/Xilinx/Vitis/2021.1
+XILINX_VIVADO: /home/user/Xilinx/Vivado/2021.1
+XILINX_VIVADO_HLS: /home/user/Xilinx/Vivado/2021.1
+XILINX_XRT: /opt/xilinx/xrt
+_RDI_DONT_SET_XILINX_AS_PATH: True
+
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+selectTreeTable("hashslayer", "hashslayer_system", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectTreeTable("hashslayer_system", "hashslayer_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Export as Archive", "Explorer", "ProjectExplorer", "MenuItem.EXPORT_AS_ARCHIVE");
+selectCheckBox("Include build folders", Boolean.TRUE, "Export Vitis Projects", "SdxArchiveExportDialog", "Button.INCLUDE_BUILD_FOLDERS");
+selectButton("OK", "Export Vitis Projects", "SdxArchiveExportDialog", "Button.OK");
+selectButton("Cancel", "Progress Information", "ProgressMonitorJobsDialog", "Button.CANCEL");
+selectTreeTable("hashslayer_system", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Export as Archive", "Explorer", "ProjectExplorer", "MenuItem.EXPORT_AS_ARCHIVE");
+selectCheckBox("Include build folders", Boolean.FALSE, "Export Vitis Projects", "SdxArchiveExportDialog", "Button.INCLUDE_BUILD_FOLDERS");
+setTextField("/home/user", "Export Vitis Projects", "SdxArchiveExportDialog", "Text.DIRECTORY");
+selectTree("System Projects", "Export Vitis Projects", "SdxArchiveExportDialog", "Tree.SYSTEM_PROJECTS");
+selectButton("OK", "Export Vitis Projects", "SdxArchiveExportDialog", "Button.OK");
+selectButton("OK", "Export Vitis Projects", "MessageDialog", "Button.OK");
+activateView("hmacSha1Kernel.cpp", "hashslayer_kernels/src/hmacSha1Kernel.cpp", "CEditor", "CTabItem.HMACSHA1KERNEL_CPP");
+selectTreeTable("hmacSha256Kernel.cpp", "hashslayer_system > hashslayer_kernels > src", "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectToolBarMenuButton("Build Hardware for project hashslayer_kernels", "hashslayer_kernels", "WorkbenchWindow", "ToolItem.BUILD_HARDWARE_FOR");
+selectMenuItem("1 Emulation-HW", "Explorer", "ProjectExplorer", "MenuItem.1_EMULATION_HW");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+selectMenuItem("Project", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.PROJECT");
+selectMenuItem("Build All", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.BUILD_ALL");
+activateView("main.cpp", "hashslayer/src/main.cpp", "CEditor", "CTabItem.MAIN_CPP");
+selectToolBarButton("Run", "hashslayer", "WorkbenchWindow", "ToolItem.RUN");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("hmacSha1Kernel.cpp", "hashslayer_system > hashslayer_kernels > src", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("hmacSha256Kernel.cpp", "hashslayer_system > hashslayer_kernels > src", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("src", "hashslayer_system > hashslayer_kernels", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("New", "Explorer", "ProjectExplorer", "MenuItem.NEW");
+selectMenuItem("File", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.FILE");
+selectButton("Finish", "Create New File (File)", "BasicNewFileResourceWizard", "Button.FINISH");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("hmacSha512Kernel", "hashslayer_system > hashslayer_kernels > src", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Rename", "Explorer", "ProjectExplorer", "MenuItem.RENAME");
+selectButton("OK", "Rename Resource", "RefactoringWizardDialog2", "Button.OK");
+activateView("hmacSha256Kernel.cpp", "hashslayer_kernels/src/hmacSha256Kernel.cpp", "CEditor", "CTabItem.HMACSHA256KERNEL_CPP");
+activateView("hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmacSha512Kernel.cpp", "TextEditor", "CTabItem.HMACSHA512KERNEL_CPP");
+closeView("hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmacSha512Kernel.cpp", "TextEditor", "CTabItem.HMACSHA512KERNEL_CPP");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("hmacSha512Kernel.cpp", "hashslayer_system > hashslayer_kernels > src", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("src", "hashslayer_system > hashslayer_kernels", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("New", "Explorer", "ProjectExplorer", "MenuItem.NEW");
+selectMenuItem("Folder", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.FOLDER");
+selectButton("Finish", "New Folder (Folder)", "BasicNewFolderResourceWizard", "Button.FINISH");
+selectTreeTable("hmac", "hashslayer_system > hashslayer_kernels > src", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("New", "Explorer", "ProjectExplorer", "MenuItem.NEW");
+selectMenuItem("Folder", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.FOLDER");
+selectButton("Finish", "New Folder (Folder)", "BasicNewFolderResourceWizard", "Button.FINISH");
+selectTreeTable("hmacSha512Kernel.cpp", "hashslayer_system > hashslayer_kernels > src", "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectTreeTable("kernel_config.hpp", "hashslayer_system > hashslayer_kernels > src", "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectTreeTable("hmacSha512Kernel.cpp", "hashslayer_system > hashslayer_kernels > src", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("Move", "Explorer", "ProjectExplorer", "MenuItem.MOVE");
+selectTree("sha512", "hashslayer_kernels > src > hmac", "Move Resources", "RefactoringWizardDialog2", "Tree.Workspace");
+selectButton("OK", "Move Resources", "RefactoringWizardDialog2", "Button.OK");
+selectTreeTable("kernel_config.hpp", "hashslayer_system > hashslayer_kernels > src", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("sha512", "hashslayer_system > hashslayer_kernels > src > hmac", EventType.POPUP_TRIGGER_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectMenuItem("New", "Explorer", "ProjectExplorer", "MenuItem.NEW");
+selectMenuItem("File", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.FILE");
+selectButton("Finish", "Create New File (File)", "BasicNewFileResourceWizard", "Button.FINISH");
+closeView("kernel_config.hpp", "hashslayer_kernels/src/hmac/sha512/kernel_config.hpp", "CEditor", "CTabItem.KERNEL_CONFIG_HPP");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("hmacSha512Kernel.cpp", "hashslayer_system > hashslayer_kernels > src > hmac > sha512", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+activateView("Explorer", "ProjectExplorer", "CTabItem.EXPLORER");
+selectTreeTable("hashslayer_kernels.prj", "hashslayer_system > hashslayer_kernels", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectTreeTable("hmacSha1Kernel_1", "hashslayer_system > hashslayer_kernels", "hashslayer_kernels", "SDXSettingsEditor", "TreeViewer.HwAcceleratorContentProvider");
+selectToolBarButton("Remove", "hashslayer_kernels", "CTabItem", "ToolItem.REMOVE");
+selectToolBarButton("Add Hardware Function", "hashslayer_kernels", "CTabItem", "ToolItem.ADD_HARDWARE_FUNCTION");
+activateView("kernel_config.hpp", "hashslayer_kernels/src/kernel_config.hpp", "CEditor", "CTabItem.KERNEL_CONFIG_HPP");
+activateView("*hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "Editor", "CTabItem.*HMACSHA512KERNEL_CPP");
+selectTreeTable("hashslayer_kernels.prj", "hashslayer_system > hashslayer_kernels", EventType.DOUBLE_CLICK, "Explorer", "ProjectExplorer", "TreeViewer.NavigatorContentServiceContentProvider");
+selectToolBarButton("Add Hardware Function", "hashslayer_kernels", "CTabItem", "ToolItem.ADD_HARDWARE_FUNCTION");
+setTextField("512", "Add Hardware Functions", "OpenCLAcceleratorsSelectionDialog", "Text");
+selectTable("hmacSha512Kernel_1", "Add Hardware Functions", "OpenCLAcceleratorsSelectionDialog", "Table");
+selectButton("OK", "Add Hardware Functions", "OpenCLAcceleratorsSelectionDialog", "Button.OK");
+closeView("hashslayer_kernels", "hashslayer_kernels/hashslayer_kernels.prj", "SDXSettingsEditor", "CTabItem.HASHSLAYER_KERNELS");
+selectMenuItem("Project", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.PROJECT");
+selectMenuItem("Build All", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.BUILD_ALL");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+selectMenuItem("Project", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.PROJECT");
+selectMenuItem("Build All", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.BUILD_ALL");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+activateView("kernel_config.hpp", "hashslayer_kernels/src/kernel_config.hpp", "CEditor", "CTabItem.KERNEL_CONFIG_HPP");
+activateView("*hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "Editor", "CTabItem.*HMACSHA512KERNEL_CPP");
+activateView("hmac.hpp", "hashslayer_kernels/libs/xf_security/L1/include/xf_s", "CEditor", "CTabItem.HMAC_HPP");
+activateView("*hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "Editor", "CTabItem.*HMACSHA512KERNEL_CPP");
+activateView("hmac.hpp", "hashslayer_kernels/libs/xf_security/L1/include/xf_s", "CEditor", "CTabItem.HMAC_HPP");
+activateView("*hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "Editor", "CTabItem.*HMACSHA512KERNEL_CPP");
+activateView("hmac.hpp", "hashslayer_kernels/libs/xf_security/L1/include/xf_s", "CEditor", "CTabItem.HMAC_HPP");
+activateView("kernel_config.hpp", "hashslayer_kernels/src/kernel_config.hpp", "CEditor", "CTabItem.KERNEL_CONFIG_HPP");
+activateView("*hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "Editor", "CTabItem.*HMACSHA512KERNEL_CPP");
+activateView("hmac.hpp", "hashslayer_kernels/libs/xf_security/L1/include/xf_s", "CEditor", "CTabItem.HMAC_HPP");
+activateView("*hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "Editor", "CTabItem.*HMACSHA512KERNEL_CPP");
+selectMenuItem("Project", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.PROJECT");
+selectMenuItem("Build All", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.BUILD_ALL");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+activateView("hmac.hpp", "hashslayer_kernels/libs/xf_security/L1/include/xf_s", "CEditor", "CTabItem.HMAC_HPP");
+activateView("hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "CEditor", "CTabItem.HMACSHA512KERNEL_CPP");
+activateView("*hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "Editor", "CTabItem.*HMACSHA512KERNEL_CPP");
+selectMenuItem("Project", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.PROJECT");
+selectMenuItem("Build All", "hashslayer_kernels", "WorkbenchWindow", "MenuItem.BUILD_ALL");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+activateView("hmac.hpp", "hashslayer_kernels/libs/xf_security/L1/include/xf_s", "CEditor", "CTabItem.HMAC_HPP");
+activateView("hmacSha512Kernel.cpp", "hashslayer_kernels/src/hmac/sha512/hmacSha512Kernel", "CEditor", "CTabItem.HMACSHA512KERNEL_CPP");
+closeView("hmac.hpp", "hashslayer_kernels/libs/xf_security/L1/include/xf_security/hmac.hpp", "CEditor", "CTabItem.HMAC_HPP");
+selectButton("Exit", "Confirm Exit", "MessageDialogWithToggle", "Button.EXIT");
+// Exiting Xilinx Vitis with a status code '0' at 5/18/24, 9:56:14 PM CEST
+// Elapsed time: 08:32:02
+

@@ -3,3 +3,4 @@ hashslayer_kernels/libs/
 RemoteSystemsTempFiles
 IDE.log
 .analytics
+*.xclbin

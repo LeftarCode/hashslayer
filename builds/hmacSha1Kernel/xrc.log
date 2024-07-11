@@ -1,0 +1,43 @@
+Sat May 18 13:24:12 2024: Server was asked to start on port: '38355'
+Sat May 18 13:24:12 2024: Server is using token UUID: '8a27e350-843f-4adb-93f5-7b99b14084f7'
+Sat May 18 13:24:12 2024: Attempting to start server on port '38355'
+Sat May 18 13:24:12 2024: XRC main fifo: created main fifo '/tmp/xrcmain8a27e350-843f-4adb-93f5-7b99b14084f7', fd read = 11
+Sat May 18 13:24:12 2024: Running Rule Check Server
+Sat May 18 13:24:12 2024: Version 1.6.1
+Sat May 18 13:24:12 2024: Rule Check Server: Accepted socket connection from client
+Sat May 18 13:24:12 2024: EXCHANGE_TOKEN received, server token: 8a27e350-843f-4adb-93f5-7b99b14084f7, passed token: 8a27e350-843f-4adb-93f5-7b99b14084f7
+Sat May 18 14:04:13 2024: SESSION_MGR: creating session with session uuid: 'c1cf691b-8bbc-424e-bc78-e7cdc41da15f' and name 'Emulation-HW'
+Sat May 18 14:04:13 2024: SESSION_MGR: closing session for UUID 'c1cf691b-8bbc-424e-bc78-e7cdc41da15f' with name 'Emulation-HW'
+Sat May 18 14:04:25 2024: SESSION_MGR: creating session with session uuid: '8c41c204-bb51-4a83-8348-1a0f5c085f10' and name 'Emulation-HW'
+Sat May 18 14:04:28 2024: SESSION_MGR: closing session for UUID '8c41c204-bb51-4a83-8348-1a0f5c085f10' with name 'Emulation-HW'
+Sat May 18 14:04:28 2024: SESSION_MGR: creating session with session uuid: '4ea984e8-97f7-4fa4-a898-a3aabb07fd20' and name 'Emulation-HW'
+Sat May 18 14:04:28 2024: SESSION_MGR: closing session for UUID '4ea984e8-97f7-4fa4-a898-a3aabb07fd20' with name 'Emulation-HW'
+Sat May 18 14:04:28 2024: SESSION_MGR: creating session with session uuid: '1f18be96-b764-4538-b5fa-1120cb200a01' and name 'Emulation-HW'
+Sat May 18 14:04:29 2024: SESSION_MGR: closing session for UUID '1f18be96-b764-4538-b5fa-1120cb200a01' with name 'Emulation-HW'
+Sat May 18 14:05:31 2024: SESSION_MGR: creating session with session uuid: '80726026-b524-4d2a-bde1-b09a5f72ae4e' and name 'SystemDebugger_hashslayer_system_hashslayer'
+Sat May 18 16:56:16 2024: SESSION_MGR: creating session with session uuid: 'b8ccba6a-4cc3-4052-b56c-2e93cffcdcb6' and name 'Emulation-HW'
+Sat May 18 16:56:17 2024: SESSION_MGR: closing session for UUID 'b8ccba6a-4cc3-4052-b56c-2e93cffcdcb6' with name 'Emulation-HW'
+Sat May 18 16:56:17 2024: SESSION_MGR: creating session with session uuid: '55e221a6-0a32-431d-b672-f34359aa10e6' and name 'Emulation-HW'
+Sat May 18 16:56:30 2024: Rule Check Server: Accepted socket connection from client
+Sat May 18 16:56:38 2024: SESSION_MGR: closing session for UUID '55e221a6-0a32-431d-b672-f34359aa10e6' with name 'Emulation-HW'
+Sat May 18 16:59:50 2024: SESSION_MGR: creating session with session uuid: 'eecaadda-53a7-4f8a-b5d9-f999fca661c2' and name 'Emulation-HW'
+Sat May 18 16:59:50 2024: SESSION_MGR: closing session for UUID 'eecaadda-53a7-4f8a-b5d9-f999fca661c2' with name 'Emulation-HW'
+Sat May 18 16:59:51 2024: SESSION_MGR: creating session with session uuid: '4b3ba689-85fe-473f-a00b-2605c96a15d3' and name 'Emulation-HW'
+Sat May 18 17:00:03 2024: Rule Check Server: Accepted socket connection from client
+Sat May 18 17:00:11 2024: SESSION_MGR: closing session for UUID '4b3ba689-85fe-473f-a00b-2605c96a15d3' with name 'Emulation-HW'
+Sat May 18 17:02:49 2024: SESSION_MGR: creating session with session uuid: 'a92922b1-6edf-445e-b9bc-cc609a09c894' and name 'Emulation-HW'
+Sat May 18 17:02:49 2024: SESSION_MGR: closing session for UUID 'a92922b1-6edf-445e-b9bc-cc609a09c894' with name 'Emulation-HW'
+Sat May 18 17:02:50 2024: SESSION_MGR: creating session with session uuid: '8edfee42-c662-4889-8599-a785e51a6ac2' and name 'Emulation-HW'
+Sat May 18 17:03:03 2024: Rule Check Server: Accepted socket connection from client
+Sat May 18 17:03:11 2024: SESSION_MGR: closing session for UUID '8edfee42-c662-4889-8599-a785e51a6ac2' with name 'Emulation-HW'
+Sat May 18 17:05:05 2024: SESSION_MGR: creating session with session uuid: '2e557319-6bca-41de-8f73-3148db8d6818' and name 'Emulation-HW'
+Sat May 18 17:05:05 2024: SESSION_MGR: closing session for UUID '2e557319-6bca-41de-8f73-3148db8d6818' with name 'Emulation-HW'
+Sat May 18 17:05:05 2024: SESSION_MGR: creating session with session uuid: '126a1d35-9941-4269-8031-9a5d3936aa5d' and name 'Emulation-HW'
+Sat May 18 17:05:18 2024: Rule Check Server: Accepted socket connection from client
+Sat May 18 17:05:25 2024: SESSION_MGR: closing session for UUID '126a1d35-9941-4269-8031-9a5d3936aa5d' with name 'Emulation-HW'
+Sat May 18 21:56:14 2024: STOP_SERVER received, server token: 8a27e350-843f-4adb-93f5-7b99b14084f7, passed token: 8a27e350-843f-4adb-93f5-7b99b14084f7
+Sat May 18 21:56:14 2024: Socket received request to stop server.
+Sat May 18 21:56:14 2024: SERVER: destructor for server bound to port 38355
+Sat May 18 21:56:14 2024: XRC main fifo: Good unlink of /tmp/xrcmain8a27e350-843f-4adb-93f5-7b99b14084f7
+Sat May 18 21:56:14 2024: Server exiting with status 0.
+Sat May 18 21:56:14 2024: Closing log file.

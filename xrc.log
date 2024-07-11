@@ -1,0 +1,14 @@
+Thu Jul 11 15:47:45 2024: Server was asked to start on port: '39447'
+Thu Jul 11 15:47:45 2024: Server is using token UUID: 'fe430bf3-7e9b-4c7e-aae1-388c7e46a7b5'
+Thu Jul 11 15:47:45 2024: Attempting to start server on port '39447'
+Thu Jul 11 15:47:45 2024: XRC main fifo: created main fifo '/tmp/xrcmainfe430bf3-7e9b-4c7e-aae1-388c7e46a7b5', fd read = 11
+Thu Jul 11 15:47:45 2024: Running Rule Check Server
+Thu Jul 11 15:47:45 2024: Version 1.6.1
+Thu Jul 11 15:47:46 2024: Rule Check Server: Accepted socket connection from client
+Thu Jul 11 15:47:46 2024: EXCHANGE_TOKEN received, server token: fe430bf3-7e9b-4c7e-aae1-388c7e46a7b5, passed token: fe430bf3-7e9b-4c7e-aae1-388c7e46a7b5
+Thu Jul 11 15:48:08 2024: SESSION_MGR: creating session with session uuid: '275daf7a-7b68-4950-96b7-d43e4ed55c91' and name 'Hardware'
+Thu Jul 11 15:48:08 2024: SESSION_MGR: closing session for UUID '275daf7a-7b68-4950-96b7-d43e4ed55c91' with name 'Hardware'
+Thu Jul 11 15:48:08 2024: SESSION_MGR: creating session with session uuid: '6a3d1c99-a84a-4da6-a746-30e3470ecd3a' and name 'Hardware'
+Thu Jul 11 15:48:09 2024: SESSION_MGR: closing session for UUID '6a3d1c99-a84a-4da6-a746-30e3470ecd3a' with name 'Hardware'
+Thu Jul 11 15:48:12 2024: SESSION_MGR: creating session with session uuid: '57c4419a-2f87-4100-ae60-bd1f952f9cb6' and name 'Hardware'
+Thu Jul 11 15:48:12 2024: SESSION_MGR: closing session for UUID '57c4419a-2f87-4100-ae60-bd1f952f9cb6' with name 'Hardware'

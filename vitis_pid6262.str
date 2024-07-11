@@ -1,0 +1,75 @@
+/*
+
+Xilinx Vitis v2021.1.0 (64-bit) [Major: 2021, Minor: 1]
+SW Build 3245906 on 2021-06-09-18:10:55
+
+Process ID (PID): 6262
+License: Customer
+
+Current time: 	Thu Jul 11 15:47:45 CEST 2024
+Time zone: 	Central European Standard Time (Europe/Warsaw)
+
+OS: Ubuntu
+OS Version: 5.0.5-050005-generic
+OS Architecture: amd64
+Available processors (cores): 16
+
+Display: :10.0
+Screen size: 1364x768
+Available screens: 1
+Available disk space: 245 GB
+
+Java version: 	11.0.2 64-bit
+Java home: 	/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2
+Java executable location: 	/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2/bin/java
+Java initial memory (-Xms): 	64 MB
+Java maximum memory (-Xmx):	 1,024 MB
+
+Java library paths: /home/user/Xilinx/Vitis/2021.1/tps/lnx64/javafx-sdk-11.0.2/lib:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o/Ubuntu:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o:/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2/lib/:/home/user/Xilinx/Vitis/2021.1/tps/lnx64/jre11.0.2/lib//server:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o/Ubuntu:/home/user/Xilinx/Vitis/2021.1/lib/lnx64.o:/home/user/Xilinx/Vitis/2021.1/tps/lnx64/python-3.8.3/lib:/home/user/Xilinx/Vitis/2021.1/aietools/lib/lnx64.o:/opt/xilinx/xrt/lib:/opt/xilinx/xrt/lib::/home/user/Xilinx/Vitis/2021.1/bin/../lnx64/tools/dot/lib:/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib
+
+Java class paths: /home/user/Xilinx/Vitis/2021.1/eclipse/lnx64.o//plugins/org.eclipse.equinox.launcher_1.5.700.v20200207-2156.jar
+LD_LIBRARY_PATH: /home/user/Xilinx/Vitis
+
+User name: 	user
+User home directory: /home/user
+User working directory: /home/user/fpga_projects/git-hashslayer
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: /home/user/Xilinx/Vitis
+HDI_APPROOT: /home/user/Xilinx/Vitis/2021.1
+RDI_DATADIR: /home/user/Xilinx/Vitis/2021.1/data
+RDI_BINDIR: /home/user/Xilinx/Vitis/2021.1/bin
+
+Vitis preferences directory: /home/user/.Xilinx/Vitis/2021.1/
+Vitis workspace directory: /home/user/fpga_projects/git-hashslayer
+Vitis workspace log file location: /home/user/fpga_projects/git-hashslayer/.metadata/.log
+Engine tmp dir: 	
+
+Xilinx Environment Variables
+----------------------------
+SDK_DIR: /home/user/aws-fpga/sdk
+VITIS_DIR: /home/user/aws-fpga/Vitis
+VIVADO_TOOL_VER: 2021.1
+XILINX_DSP: 
+XILINX_ENABLE_AWS_WHITELIST: 095707098027
+XILINX_HLS: /home/user/Xilinx/Vitis_HLS/2021.1
+XILINX_PLANAHEAD: /home/user/Xilinx/Vitis/2021.1
+XILINX_SDK: /home/user/Xilinx/Vitis/2021.1
+XILINX_VITIS: /home/user/Xilinx/Vitis/2021.1
+XILINX_VIVADO: /home/user/Xilinx/Vivado/2021.1
+XILINX_VIVADO_HLS: /home/user/Xilinx/Vivado/2021.1
+XILINX_XRT: /opt/xilinx/xrt
+_RDI_DONT_SET_XILINX_AS_PATH: True
+
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+selectMenuItem("Project", "hashslayer_system_hw_link", "WorkbenchWindow", "MenuItem.PROJECT");
+selectMenuItem("Clean", "hashslayer_system_hw_link", "WorkbenchWindow", "MenuItem.CLEAN");
+selectButton("Clean", "Clean", "CleanDialog", "Button.CLEAN");
+activateView("Console", "ConsoleView", "CTabItem.CONSOLE");
+selectButton("Clean", "Clean project", "MessageDialog", "Button.CLEAN");
